@@ -3,20 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "../components/TodoItem";
 import { ADD_TODO } from "../Redux/todo_redux/action";
 import "../index.css";
-import { useToast } from "@chakra-ui/react";
+import { useToast, Input, Button, VStack, Box } from "@chakra-ui/react";
 
 function Todo() {
   const current_todo = useSelector((state) => state.todo.todo);
   const current_user_status = useSelector((state) => state.todo.auth_user);
-
   const [title, setTitle] = useState("");
   const dispatch = useDispatch();
   const toast = useToast();
 
-  const handleChange = (event) => {
-    const { value } = event.target;
-    setTitle(value);
-  };
+  const handleChange = (event) => setTitle(event.target.value);
 
   const handleAddTodo = () => {
     if (!current_user_status) {
@@ -30,36 +26,45 @@ function Todo() {
       return;
     }
     const newTodo = {
-      id: Date.now(),
+      id: Date.now(), // Normally, you would want the backend to assign IDs.
       title: title,
       status: false,
     };
     dispatch({ type: ADD_TODO, payload: newTodo });
     setTitle("");
+    toast({
+      title: "Success",
+      description: "Todo added successfully.",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
   };
 
   return (
-    <>
-      <div className="todo">
-        <input
-          style={{ border: "1px solid black", padding: "5px 15px" }}
-          onChange={handleChange}
-          type="text"
+    <VStack spacing={4} align="stretch">
+      <Box p={5} shadow="md" borderWidth="1px">
+        <Input
           placeholder="Enter todo..."
-          name="todo"
-          id="todo"
+          size="md"
           value={title}
+          onChange={handleChange}
+          mr={3}
         />
-        <button className="btn" onClick={handleAddTodo}>
-          ADD_TODO
-        </button>
-      </div>
+        <Button 
+          colorScheme="blue" 
+          onClick={handleAddTodo} 
+          ml={2}>
+          Add Todo
+        </Button>
+      </Box>
 
       {current_todo.map((item) => (
         <TodoItem key={item.id} {...item} />
       ))}
-    </>
+    </VStack>
   );
 }
 
 export default Todo;
+

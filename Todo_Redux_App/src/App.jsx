@@ -9,7 +9,7 @@ function App() {
       <Box
         display={"flex"}
         justifyContent={"space-between"}
-        backgroundColor={"teal"}
+        backgroundColor={"green"}
         borderRadius={"5px"}
         padding={"10px"}
         w={"98%"}
