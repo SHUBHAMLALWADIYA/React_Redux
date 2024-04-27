@@ -1,0 +1,42 @@
+.light_theme {
+  background-color: white;
+  color: black;
+}
+
+.dark_theme {
+  background-color: black;
+  color: white;
+}
+
+.todo {
+  width: 50%;
+  margin: 1rem auto;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.todo > input {
+  padding: 5px 10px;
+  border: 1px solid black;
+}
+.todo > button {
+  background-color: green;
+  color: white;
+  padding: 5px;
+  border-radius: 4px;
+}
+.items {
+  text-align: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.items > button {
+  cursor: pointer;
+  color: white;
+  background-color: rgb(33, 55, 217);
+  border-radius: 4px;
+  padding: 5px;
+}
